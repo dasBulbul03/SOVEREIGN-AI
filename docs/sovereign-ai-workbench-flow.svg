@@ -1,0 +1,232 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="3000" viewBox="0 0 2400 3000" role="img" aria-labelledby="title desc">
+  <title id="title">Sovereign AI Workbench — UML Activity Flow</title>
+  <desc id="desc">End-to-end activity flow from task submission through automatic agent and model routing, governed workflow execution, validation, artifacts, audit, and completion.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#172033" flood-opacity="0.13"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L12,6 L0,12 z" fill="#44536a"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L12,6 L0,12 z" fill="#c73d4d"/>
+    </marker>
+    <style>
+      .title { font: 700 44px Inter, Arial, sans-serif; fill: #152238; }
+      .subtitle { font: 400 21px Inter, Arial, sans-serif; fill: #607089; }
+      .phase { font: 700 18px Inter, Arial, sans-serif; letter-spacing: 2px; fill: #52627a; }
+      .lane-title { font: 700 23px Inter, Arial, sans-serif; fill: #ffffff; }
+      .node-title { font: 700 21px Inter, Arial, sans-serif; fill: #18263b; }
+      .node-copy { font: 400 17px Inter, Arial, sans-serif; fill: #52627a; }
+      .guard { font: 700 16px Inter, Arial, sans-serif; fill: #35445a; }
+      .small { font: 500 15px Inter, Arial, sans-serif; fill: #65758c; }
+      .white-small { font: 500 15px Inter, Arial, sans-serif; fill: #eaf0f8; }
+      .activity { fill: #ffffff; stroke: #75849a; stroke-width: 2.5; rx: 18; filter: url(#shadow); }
+      .system { fill: #eef5ff; stroke: #3978be; stroke-width: 2.5; rx: 18; filter: url(#shadow); }
+      .decision { fill: #fff9e8; stroke: #d19a25; stroke-width: 2.8; filter: url(#shadow); }
+      .failure { fill: #fff0f2; stroke: #c73d4d; stroke-width: 2.5; rx: 18; filter: url(#shadow); }
+      .success { fill: #edf9f3; stroke: #29825d; stroke-width: 2.5; rx: 18; filter: url(#shadow); }
+      .flow { fill: none; stroke: #44536a; stroke-width: 3; marker-end: url(#arrow); }
+      .flow-red { fill: none; stroke: #c73d4d; stroke-width: 3; marker-end: url(#arrow-red); }
+      .branch-flow { fill: none; stroke: #44536a; stroke-width: 2.5; marker-end: url(#arrow); }
+      .boundary { fill: none; stroke: #8e9db0; stroke-width: 2; stroke-dasharray: 12 10; rx: 26; }
+    </style>
+  </defs>
+
+  <rect width="2400" height="3000" fill="#f5f7fb"/>
+  <text x="1200" y="70" text-anchor="middle" class="title">Sovereign AI Workbench — End-to-End UML Activity Flow</text>
+  <text x="1200" y="108" text-anchor="middle" class="subtitle">Automatic agent classification, deterministic local-model routing, governed execution, and auditable outputs</text>
+
+  <rect x="70" y="140" width="2260" height="2745" class="boundary"/>
+  <rect x="100" y="126" width="342" height="34" rx="17" fill="#f5f7fb"/>
+  <text x="120" y="150" class="phase">LOCAL / ON-PREMISE TRUST BOUNDARY</text>
+
+  <!-- Start and intake -->
+  <circle cx="1200" cy="182" r="17" fill="#1e2b3d"/>
+  <path d="M1200 199 V235" class="flow"/>
+
+  <rect x="790" y="238" width="820" height="112" class="activity"/>
+  <text x="1200" y="279" text-anchor="middle" class="node-title">Operator prepares a Workbench task</text>
+  <text x="1200" y="310" text-anchor="middle" class="node-copy">Select workspace files / knowledge bases, describe outcome, keep Automatic or choose an override</text>
+  <text x="1200" y="334" text-anchor="middle" class="small">Next.js UI · authenticated organization session</text>
+  <path d="M1200 350 V397" class="flow"/>
+
+  <polygon points="1200,398 1370,480 1200,562 1030,480" class="decision"/>
+  <text x="1200" y="472" text-anchor="middle" class="node-title">Authorized and valid?</text>
+  <text x="1200" y="499" text-anchor="middle" class="small">ownership · IDs · MIME · size · mode</text>
+  <text x="1200" y="523" text-anchor="middle" class="small">FastAPI policy boundary</text>
+
+  <path d="M1370 480 H1780" class="flow-red"/>
+  <text x="1535" y="463" text-anchor="middle" class="guard">[no]</text>
+  <rect x="1800" y="421" width="440" height="118" class="failure"/>
+  <text x="2020" y="463" text-anchor="middle" class="node-title">Reject safely</text>
+  <text x="2020" y="494" text-anchor="middle" class="node-copy">Return actionable error</text>
+  <text x="2020" y="520" text-anchor="middle" class="small">Persist security / validation audit</text>
+
+  <path d="M1200 562 V610" class="flow"/>
+  <text x="1223" y="590" class="guard">[yes]</text>
+  <rect x="820" y="612" width="760" height="110" class="system"/>
+  <text x="1200" y="654" text-anchor="middle" class="node-title">Create durable task and queued run</text>
+  <text x="1200" y="685" text-anchor="middle" class="node-copy">Idempotency key · PostgreSQL state · background worker dispatch</text>
+  <path d="M1200 722 V770" class="flow"/>
+
+  <!-- Classification and routing -->
+  <rect x="820" y="772" width="760" height="112" class="system"/>
+  <text x="1200" y="814" text-anchor="middle" class="node-title">Classify task and select agent profile</text>
+  <text x="1200" y="845" text-anchor="middle" class="node-copy">Automatic: goal + selected inputs → document / RAG / coding / procurement / general</text>
+  <text x="1200" y="870" text-anchor="middle" class="small">An explicit workflow override wins when intent is ambiguous</text>
+  <path d="M1200 884 V930" class="flow"/>
+
+  <rect x="820" y="932" width="760" height="112" class="system"/>
+  <text x="1200" y="974" text-anchor="middle" class="node-title">Derive mandatory capabilities</text>
+  <text x="1200" y="1005" text-anchor="middle" class="node-copy">Examples: text + reasoning · text + coding · vision preprocessing</text>
+  <text x="1200" y="1030" text-anchor="middle" class="small">Persist task type, reasons, capabilities, and agent profile</text>
+  <path d="M1200 1044 V1090" class="flow"/>
+
+  <rect x="745" y="1092" width="910" height="118" class="system"/>
+  <text x="1200" y="1134" text-anchor="middle" class="node-title">Deterministic capability router evaluates local models</text>
+  <text x="1200" y="1165" text-anchor="middle" class="node-copy">Enabled → capability coverage → health probe → stable priority ordering</text>
+  <text x="1200" y="1191" text-anchor="middle" class="small">Ollama only · record candidates, exclusions, latency, and selection reason</text>
+  <path d="M1200 1210 V1248" class="flow"/>
+
+  <polygon points="1200,1250 1370,1327 1200,1404 1030,1327" class="decision"/>
+  <text x="1200" y="1319" text-anchor="middle" class="node-title">Capable healthy model?</text>
+  <text x="1200" y="1348" text-anchor="middle" class="small">highest-priority eligible candidate</text>
+  <path d="M1370 1327 H2285" class="flow-red"/>
+  <text x="1535" y="1310" text-anchor="middle" class="guard">[no]</text>
+  <path d="M1200 1404 V1442" class="flow"/>
+  <text x="1223" y="1432" class="guard">[yes]</text>
+
+  <!-- Workflow lanes -->
+  <rect x="130" y="1460" width="680" height="620" rx="24" fill="#edf5ff" stroke="#72a4dc" stroke-width="2"/>
+  <rect x="130" y="1460" width="680" height="60" rx="24" fill="#3978be"/>
+  <rect x="130" y="1496" width="680" height="24" fill="#3978be"/>
+  <text x="470" y="1498" text-anchor="middle" class="lane-title">DOCUMENT / RAG AGENT</text>
+
+  <rect x="860" y="1460" width="680" height="620" rx="24" fill="#f5f0ff" stroke="#9575cd" stroke-width="2"/>
+  <rect x="860" y="1460" width="680" height="60" rx="24" fill="#7354ae"/>
+  <rect x="860" y="1496" width="680" height="24" fill="#7354ae"/>
+  <text x="1200" y="1498" text-anchor="middle" class="lane-title">CODING AGENT</text>
+
+  <rect x="1590" y="1460" width="680" height="620" rx="24" fill="#fff6e8" stroke="#dda84b" stroke-width="2"/>
+  <rect x="1590" y="1460" width="680" height="60" rx="24" fill="#b77a16"/>
+  <rect x="1590" y="1496" width="680" height="24" fill="#b77a16"/>
+  <text x="1930" y="1498" text-anchor="middle" class="lane-title">PROCUREMENT AGENT</text>
+
+  <path d="M1200 1442 V1434 H470 V1544" class="branch-flow"/>
+  <path d="M1200 1442 V1544" class="branch-flow"/>
+  <path d="M1200 1442 V1434 H1930 V1544" class="branch-flow"/>
+  <text x="745" y="1422" text-anchor="middle" class="guard">[document / rag / general]</text>
+  <text x="1200" y="1422" text-anchor="middle" class="guard">[coding]</text>
+  <text x="1683" y="1422" text-anchor="middle" class="guard">[procurement]</text>
+
+  <!-- Document lane -->
+  <rect x="175" y="1545" width="590" height="100" class="activity"/>
+  <text x="470" y="1583" text-anchor="middle" class="node-title">Normalize selected evidence</text>
+  <text x="470" y="1613" text-anchor="middle" class="node-copy">Text extraction · page-aware OCR · local vision</text>
+  <path d="M470 1645 V1675" class="branch-flow"/>
+  <rect x="175" y="1677" width="590" height="112" class="activity"/>
+  <text x="470" y="1718" text-anchor="middle" class="node-title">Hybrid retrieval</text>
+  <text x="470" y="1748" text-anchor="middle" class="node-copy">Direct read or temporary task RAG</text>
+  <text x="470" y="1774" text-anchor="middle" class="small">+ persistent Qdrant knowledge indexes</text>
+  <path d="M470 1789 V1819" class="branch-flow"/>
+  <rect x="175" y="1821" width="590" height="100" class="activity"/>
+  <text x="470" y="1859" text-anchor="middle" class="node-title">Generate grounded response</text>
+  <text x="470" y="1889" text-anchor="middle" class="node-copy">Ranked evidence · source/page citations</text>
+  <path d="M470 1921 V1951" class="branch-flow"/>
+  <rect x="175" y="1953" width="590" height="88" class="success"/>
+  <text x="470" y="1990" text-anchor="middle" class="node-title">Validate response + DOCX</text>
+  <text x="470" y="2018" text-anchor="middle" class="small">Abstain when evidence is insufficient</text>
+
+  <!-- Coding lane -->
+  <rect x="905" y="1545" width="590" height="100" class="activity"/>
+  <text x="1200" y="1583" text-anchor="middle" class="node-title">Materialize repository snapshot</text>
+  <text x="1200" y="1613" text-anchor="middle" class="node-copy">Immutable upload → run-scoped working copy</text>
+  <path d="M1200 1645 V1675" class="branch-flow"/>
+  <rect x="905" y="1677" width="590" height="112" class="activity"/>
+  <text x="1200" y="1718" text-anchor="middle" class="node-title">Prove sandbox boundary</text>
+  <text x="1200" y="1748" text-anchor="middle" class="node-copy">Non-root · resource limits · network none</text>
+  <text x="1200" y="1774" text-anchor="middle" class="small">Run fixed baseline verification command</text>
+  <path d="M1200 1789 V1819" class="branch-flow"/>
+  <rect x="905" y="1821" width="590" height="100" class="activity"/>
+  <text x="1200" y="1859" text-anchor="middle" class="node-title">Propose and apply bounded patch</text>
+  <text x="1200" y="1889" text-anchor="middle" class="node-copy">Local coding model · allowlisted file changes</text>
+  <path d="M1200 1921 V1951" class="branch-flow"/>
+  <rect x="905" y="1953" width="590" height="88" class="success"/>
+  <text x="1200" y="1990" text-anchor="middle" class="node-title">Verify tests; bounded repair</text>
+  <text x="1200" y="2018" text-anchor="middle" class="small">Patch + repository ZIP + sandbox report</text>
+
+  <!-- Procurement lane -->
+  <rect x="1635" y="1545" width="590" height="100" class="activity"/>
+  <text x="1930" y="1583" text-anchor="middle" class="node-title">Extract quotation evidence</text>
+  <text x="1930" y="1613" text-anchor="middle" class="node-copy">CSV parsing · OCR · local visual context</text>
+  <path d="M1930 1645 V1675" class="branch-flow"/>
+  <rect x="1635" y="1677" width="590" height="112" class="activity"/>
+  <text x="1930" y="1718" text-anchor="middle" class="node-title">Retrieve procurement policy</text>
+  <text x="1930" y="1748" text-anchor="middle" class="node-copy">Selected files + indexed knowledge bases</text>
+  <text x="1930" y="1774" text-anchor="middle" class="small">Retain source and page provenance</text>
+  <path d="M1930 1789 V1819" class="branch-flow"/>
+  <rect x="1635" y="1821" width="590" height="100" class="activity"/>
+  <text x="1930" y="1859" text-anchor="middle" class="node-title">Compute governed comparison</text>
+  <text x="1930" y="1889" text-anchor="middle" class="node-copy">Totals · compliance · recommendation</text>
+  <path d="M1930 1921 V1951" class="branch-flow"/>
+  <rect x="1635" y="1953" width="590" height="88" class="success"/>
+  <text x="1930" y="1990" text-anchor="middle" class="node-title">Validate XLSX + DOCX</text>
+  <text x="1930" y="2018" text-anchor="middle" class="small">Decision remains subject to human review</text>
+
+  <!-- Join and completion -->
+  <path d="M470 2041 V2110 H1200" fill="none" stroke="#44536a" stroke-width="2.5"/>
+  <path d="M1200 2041 V2110" fill="none" stroke="#44536a" stroke-width="2.5"/>
+  <path d="M1930 2041 V2110 H1200" fill="none" stroke="#44536a" stroke-width="2.5"/>
+  <rect x="820" y="2104" width="760" height="14" rx="7" fill="#26364d"/>
+  <path d="M1200 2118 V2160" class="flow"/>
+
+  <polygon points="1200,2162 1370,2239 1200,2316 1030,2239" class="decision"/>
+  <text x="1200" y="2231" text-anchor="middle" class="node-title">Completion proof valid?</text>
+  <text x="1200" y="2260" text-anchor="middle" class="small">citations · tests · artifact structure</text>
+  <path d="M1370 2239 H2285" class="flow-red"/>
+  <text x="1535" y="2222" text-anchor="middle" class="guard">[no / retries exhausted]</text>
+  <path d="M1200 2316 V2355" class="flow"/>
+  <text x="1223" y="2343" class="guard">[yes]</text>
+
+  <rect x="800" y="2357" width="800" height="106" class="success"/>
+  <text x="1200" y="2397" text-anchor="middle" class="node-title">Publish immutable validated artifacts</text>
+  <text x="1200" y="2428" text-anchor="middle" class="node-copy">Atomic write · SHA-256 checksum · organization branding · download metadata</text>
+  <path d="M1200 2463 V2502" class="flow"/>
+
+  <rect x="800" y="2504" width="800" height="106" class="system"/>
+  <text x="1200" y="2544" text-anchor="middle" class="node-title">Commit terminal state and audit evidence</text>
+  <text x="1200" y="2575" text-anchor="middle" class="node-copy">Task/run/steps · route · tools · sources/pages · timings · failures · artifacts</text>
+  <path d="M1200 2610 V2649" class="flow"/>
+
+  <rect x="800" y="2651" width="800" height="106" class="activity"/>
+  <text x="1200" y="2691" text-anchor="middle" class="node-title">Workbench renders the result</text>
+  <text x="1200" y="2722" text-anchor="middle" class="node-copy">Live trace · readable Markdown · citations · every artifact · audit link</text>
+  <path d="M1200 2757 V2800" class="flow"/>
+
+  <circle cx="1200" cy="2837" r="29" fill="none" stroke="#1e2b3d" stroke-width="5"/>
+  <circle cx="1200" cy="2837" r="17" fill="#1e2b3d"/>
+  <text x="1200" y="2893" text-anchor="middle" class="node-title">Task completed</text>
+
+  <!-- Shared failure terminal -->
+  <path d="M2240 480 H2285 V2668 H2245" class="flow-red"/>
+  <rect x="1795" y="2604" width="450" height="128" class="failure"/>
+  <text x="2020" y="2645" text-anchor="middle" class="node-title">Fail closed</text>
+  <text x="2020" y="2676" text-anchor="middle" class="node-copy">Categorize error · retain evidence</text>
+  <text x="2020" y="2703" text-anchor="middle" class="small">Never claim unverified completion</text>
+  <path d="M2020 2732 V2790" class="flow-red"/>
+  <circle cx="2020" cy="2825" r="29" fill="none" stroke="#c73d4d" stroke-width="5"/>
+  <circle cx="2020" cy="2825" r="17" fill="#c73d4d"/>
+  <text x="2020" y="2880" text-anchor="middle" class="node-title">Task failed safely</text>
+
+  <!-- Legend -->
+  <rect x="145" y="2775" width="630" height="78" rx="16" fill="#ffffff" stroke="#c5ceda" stroke-width="2"/>
+  <circle cx="180" cy="2814" r="10" fill="#1e2b3d"/>
+  <text x="200" y="2820" class="small">initial/final</text>
+  <rect x="330" y="2798" width="55" height="31" rx="8" fill="#ffffff" stroke="#75849a" stroke-width="2"/>
+  <text x="399" y="2820" class="small">activity</text>
+  <polygon points="525,2797 548,2814 525,2831 502,2814" fill="#fff9e8" stroke="#d19a25" stroke-width="2"/>
+  <text x="560" y="2820" class="small">decision / guard</text>
+  <line x1="693" y1="2814" x2="735" y2="2814" stroke="#26364d" stroke-width="8"/>
+  <text x="745" y="2820" class="small">join</text>
+</svg>

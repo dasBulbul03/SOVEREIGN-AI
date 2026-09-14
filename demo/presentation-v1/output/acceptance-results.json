@@ -1,0 +1,81 @@
+{
+  "dataset": "presentation-v1.0.0",
+  "organization": "Aegis Process Systems Pvt. Ltd.",
+  "status": "passed",
+  "sovereignty_probe": {
+    "status": "blocked",
+    "target": "https://example.com",
+    "duration_ms": 6,
+    "detail": "The API runtime could not establish an outbound connection.",
+    "observed_at": "2026-09-13T21:56:22.137744Z",
+    "enforcement": "configured",
+    "probe_version": "day6-v1"
+  },
+  "models": [
+    {
+      "model_key": "qwen3:1.7b",
+      "health": "ready"
+    },
+    {
+      "model_key": "nomic-embed-text",
+      "health": "ready"
+    },
+    {
+      "model_key": "gemma3:4b",
+      "health": "ready"
+    },
+    {
+      "model_key": "qwen2.5-coder:1.5b",
+      "health": "ready"
+    }
+  ],
+  "runs": {
+    "inspection": {
+      "task_id": "52e36181-26e3-4e5d-8386-08ac06dc818e",
+      "run_id": "5411471a-83ff-4e85-8308-1db966cc81d5",
+      "task_type": "rag",
+      "selected_model": "qwen3:1.7b",
+      "step_count": 8,
+      "artifact_count": 1
+    },
+    "coding": {
+      "task_id": "8f3c39dc-a178-471a-8d51-00776f3f98c9",
+      "run_id": "75610c80-4c2c-4ade-baac-a69fed21cf8c",
+      "task_type": "coding",
+      "selected_model": "qwen2.5-coder:1.5b",
+      "step_count": 11,
+      "artifact_count": 3
+    },
+    "procurement": {
+      "task_id": "6328e121-c881-490d-aa34-b4fc163cfca8",
+      "run_id": "7f567ba1-a71c-47d7-b21e-3bcd6e66a2fd",
+      "task_type": "procurement",
+      "selected_model": "qwen3:1.7b",
+      "step_count": 7,
+      "artifact_count": 2
+    }
+  },
+  "office_outputs": [
+    {
+      "artifact_id": "d87603dc-c0d2-4401-94ed-1c6e9935c1cd",
+      "path": "output/inspection-approval-recommendation-5411471a.docx",
+      "sha256": "a03796cc6febf990c2839ccbf3a385dc430ee5ed56dfe5529fcb62dc43be00ad",
+      "bytes": 39535,
+      "validation_status": "valid"
+    },
+    {
+      "artifact_id": "0e5b7320-d39f-41bc-83cd-5bd039e4ce13",
+      "path": "output/procurement-procurement-comparison-7f567ba1.xlsx",
+      "sha256": "d8c7fdd67a27ae6bcb9e6772d7a7576029ad8e59cdc816a56ca483b9f689a6d0",
+      "bytes": 7845,
+      "validation_status": "valid"
+    },
+    {
+      "artifact_id": "46d48d74-df80-4822-ae01-4248b8c39910",
+      "path": "output/procurement-procurement-recommendation-7f567ba1.docx",
+      "sha256": "bd278a4c02eca4a97c7654b2f18656a42d3e781270322be58c4959b4ac948e56",
+      "bytes": 38839,
+      "validation_status": "valid"
+    }
+  ]
+}

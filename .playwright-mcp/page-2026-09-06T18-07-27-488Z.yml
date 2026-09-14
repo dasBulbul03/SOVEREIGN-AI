@@ -1,0 +1,46 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e4]: SF
+      - generic [ref=e5]:
+        - paragraph [ref=e6]: Local AI operations
+        - heading "SovereignForge" [level=1] [ref=e7]
+      - navigation "Primary navigation" [ref=e8]:
+        - link "Dashboard" [ref=e9] [cursor=pointer]:
+          - /url: /
+        - link "Workbench" [ref=e10] [cursor=pointer]:
+          - /url: /workbench
+        - link "Models" [ref=e11] [cursor=pointer]:
+          - /url: /models
+      - generic [ref=e12]:
+        - text: Sovereign mode
+        - generic [ref=e14]: Local providers only
+    - main [ref=e15]:
+      - generic [ref=e16]:
+        - generic [ref=e17]:
+          - generic [ref=e18]:
+            - paragraph [ref=e19]: Day 1 foundation
+            - heading "Local AI control plane" [level=2] [ref=e20]
+            - paragraph [ref=e21]: Verify every dependency before confidential work enters the system.
+          - link "Open workbench" [ref=e22] [cursor=pointer]:
+            - /url: /workbench
+        - region "Foundation status" [ref=e23]:
+          - article [ref=e24]:
+            - generic [ref=e25]: Cloud AI providers
+            - strong [ref=e26]: "0"
+            - generic [ref=e27]: None configured
+          - article [ref=e28]:
+            - generic [ref=e29]: Model concurrency
+            - strong [ref=e30]: "1"
+            - generic [ref=e31]: M1 8 GB profile
+          - article [ref=e32]:
+            - generic [ref=e33]: Execution mode
+            - strong [ref=e34]: Local
+            - generic [ref=e35]: Native Ollama
+        - generic [ref=e36]: Checking local services…
+        - generic [ref=e37]:
+          - generic [ref=e38]:
+            - paragraph [ref=e39]: Milestone
+            - heading "Foundation before autonomy" [level=2] [ref=e40]
+          - paragraph [ref=e41]: Today proves UI → API → registry → local model. Document ingestion, routing, agent tools, and sandbox execution are deliberately added as later vertical slices.
+  - alert [ref=e42]

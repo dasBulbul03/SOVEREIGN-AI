@@ -1,0 +1,1 @@
+Review the P-101 inspection report and image against the selected maintenance SOP. Identify the risk, state whether maintenance may proceed, list the required safety controls, cite the supporting file and page for every material claim, and create a concise approval-note DOCX for the maintenance manager. Do not invent missing facts.

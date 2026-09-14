@@ -1,0 +1,1 @@
+Compare all quotations against the selected procurement policy. Preserve source values, calculate totals, identify every failed control, recommend the lowest-cost fully compliant vendor, cite the policy evidence, and create a formatted comparison XLSX plus a recommendation DOCX. Treat missing data as “Not provided” and keep final approval with the procurement manager.

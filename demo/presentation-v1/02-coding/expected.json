@@ -1,0 +1,10 @@
+{
+  "workflow": "coding",
+  "test_command": "pytest",
+  "requested_outputs": ["patch", "repository", "sandbox_report"],
+  "baseline_expected": {"failed": 1, "passed": 2},
+  "final_expected": {"exit_code": 0, "passed": 3},
+  "allowed_changed_files": ["monitor.py"],
+  "required_behavior": "temperature and vibration alarm counts are added",
+  "network_expected": "blocked"
+}

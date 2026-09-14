@@ -1,0 +1,1 @@
+Fix the defect so total_alarm_count returns the sum of temperature and vibration alarms. Make the smallest safe change and run the complete pytest suite. Do not modify tests, data, or dependencies. Publish the verified patch and repository only if all tests pass.

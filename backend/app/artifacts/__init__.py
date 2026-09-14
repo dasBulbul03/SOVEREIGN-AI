@@ -1,0 +1,1 @@
+"""Validated immutable artifact publication."""

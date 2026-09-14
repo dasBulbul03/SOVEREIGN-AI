@@ -1,0 +1,1 @@
+"""SOVEREIGN AI application package."""

@@ -1,0 +1,180 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-sovereignforge}
+      POSTGRES_USER: ${POSTGRES_USER:-sovereignforge}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sovereignforge_dev}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks: [data_net]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    mem_limit: 256m
+
+  qdrant:
+    image: qdrant/qdrant:v1.15.4
+    volumes:
+      - qdrant_data:/qdrant/storage
+    ports:
+      - "127.0.0.1:6333:6333"
+    networks: [data_net]
+    healthcheck:
+      test: ["CMD", "bash", "-c", "</dev/tcp/127.0.0.1/6333"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    mem_limit: 384m
+
+  pgadmin:
+    image: dpage/pgadmin4:9.17
+    profiles: [development]
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@example.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-sovereignforge_pgadmin_dev}
+      PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: "True"
+      PGADMIN_CONFIG_UPGRADE_CHECK_ENABLED: "False"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    ports:
+      - "127.0.0.1:5050:80"
+    networks: [data_net]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    mem_limit: 512m
+
+  api-worker:
+    build:
+      context: ./backend
+    env_file: ${ENV_FILE:-.env.example}
+    environment:
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-sovereignforge}:${POSTGRES_PASSWORD:-sovereignforge_dev}@postgres:5432/${POSTGRES_DB:-sovereignforge}
+      QDRANT_URL: http://qdrant:6333
+      OLLAMA_BASE_URL: http://ollama-gateway:11435
+      APP_EGRESS_ENFORCED: "true"
+      DATA_ROOT: /app/data
+      SANDBOX_RUNNER_URL: http://sandbox-runner:8090
+      SANDBOX_RUNNER_TOKEN: ${SANDBOX_RUNNER_TOKEN:-sandbox-dev-token}
+    volumes:
+      - workspace_data:/app/data
+    networks: [app_net, data_net, sandbox_control_net]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      qdrant:
+        condition: service_healthy
+      sandbox-runner:
+        condition: service_healthy
+      ollama-gateway:
+        condition: service_healthy
+    command: ["sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"]
+    mem_limit: 512m
+
+  api-ingress:
+    build:
+      context: ./backend
+    environment:
+      API_UPSTREAM_URL: http://api-worker:8000
+    command: ["uvicorn", "app.ingress_gateway:app", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - "127.0.0.1:8000:8000"
+    networks: [app_net, ingress_net]
+    depends_on:
+      api-worker:
+        condition: service_started
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=16m
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/gateway-health', timeout=3)"]
+      interval: 5s
+      timeout: 4s
+      retries: 12
+    mem_limit: 128m
+
+  ollama-gateway:
+    build:
+      context: ./backend
+    environment:
+      OLLAMA_UPSTREAM_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+    command: ["uvicorn", "app.ollama_gateway:app", "--host", "0.0.0.0", "--port", "11435"]
+    networks: [app_net, ollama_host_net]
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=16m
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:11435/health', timeout=3)"]
+      interval: 5s
+      timeout: 4s
+      retries: 12
+    mem_limit: 128m
+
+  sandbox-runtime:
+    build:
+      context: ./sandbox-image
+    image: sovereignforge-sandbox-python:day4
+    entrypoint: ["true"]
+    network_mode: none
+    restart: "no"
+
+  sandbox-runner:
+    build:
+      context: ./sandbox-runner
+    environment:
+      SANDBOX_RUNNER_TOKEN: ${SANDBOX_RUNNER_TOKEN:-sandbox-dev-token}
+      SANDBOX_IMAGE: sovereignforge-sandbox-python:day4
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks: [sandbox_control_net]
+    depends_on:
+      sandbox-runtime:
+        condition: service_completed_successfully
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=32m
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8090/health', timeout=2)"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+    mem_limit: 128m
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000/api/v1}
+    environment:
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000/api/v1}
+    ports:
+      - "127.0.0.1:3000:3000"
+    networks: [ingress_net]
+    depends_on: [api-worker]
+    mem_limit: 256m
+
+networks:
+  app_net:
+    internal: true
+  data_net:
+    internal: true
+  sandbox_control_net:
+    internal: true
+  ollama_host_net:
+  ingress_net:
+
+volumes:
+  postgres_data:
+  qdrant_data:
+  workspace_data:
+  pgadmin_data:

@@ -1,0 +1,7 @@
+{
+  "extends": ["//"],
+  "tasks": {
+    "build": { "outputs": [] },
+    "typecheck": { "outputs": [] }
+  }
+}

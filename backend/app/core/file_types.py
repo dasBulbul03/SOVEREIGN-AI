@@ -1,0 +1,103 @@
+from pathlib import PurePath
+
+# Text-based source formats accepted by upload, repository isolation, and auto-routing.
+# Configuration/document formats are intentionally kept separate: a JSON or Markdown
+# attachment alone must not turn a document-analysis request into a coding task.
+SOURCE_CODE_SUFFIXES = frozenset(
+    {
+        ".asm",
+        ".astro",
+        ".bash",
+        ".c",
+        ".cc",
+        ".clj",
+        ".cljs",
+        ".cljc",
+        ".cob",
+        ".cpp",
+        ".cs",
+        ".css",
+        ".cu",
+        ".cuh",
+        ".cxx",
+        ".dart",
+        ".erl",
+        ".ex",
+        ".exs",
+        ".fish",
+        ".fs",
+        ".fsx",
+        ".go",
+        ".gql",
+        ".gradle",
+        ".graphql",
+        ".groovy",
+        ".h",
+        ".hh",
+        ".hpp",
+        ".hrl",
+        ".hs",
+        ".htm",
+        ".html",
+        ".hxx",
+        ".java",
+        ".js",
+        ".jsx",
+        ".kt",
+        ".kts",
+        ".less",
+        ".lhs",
+        ".lua",
+        ".m",
+        ".mm",
+        ".ml",
+        ".mli",
+        ".nim",
+        ".php",
+        ".pl",
+        ".pm",
+        ".proto",
+        ".ps1",
+        ".py",
+        ".r",
+        ".rb",
+        ".rs",
+        ".s",
+        ".sass",
+        ".scala",
+        ".scss",
+        ".sh",
+        ".sol",
+        ".sql",
+        ".svelte",
+        ".swift",
+        ".tf",
+        ".ts",
+        ".tsx",
+        ".vb",
+        ".vue",
+        ".zig",
+        ".zsh",
+    }
+)
+
+REPOSITORY_SUPPORT_SUFFIXES = SOURCE_CODE_SUFFIXES | frozenset(
+    {
+        ".cfg",
+        ".csv",
+        ".ini",
+        ".ipynb",
+        ".json",
+        ".md",
+        ".toml",
+        ".txt",
+        ".xml",
+        ".yaml",
+        ".yml",
+    }
+)
+
+
+def is_source_code_filename(filename: str) -> bool:
+    path = PurePath(filename.casefold())
+    return path.suffix in SOURCE_CODE_SUFFIXES or path.suffix == ".zip"

@@ -1,0 +1,4 @@
+shift,temperature_alarms,vibration_alarms,expected_total
+A,7,5,12
+B,3,0,3
+C,0,0,0

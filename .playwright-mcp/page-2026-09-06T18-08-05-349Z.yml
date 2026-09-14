@@ -1,0 +1,36 @@
+- generic [active] [ref=f2e1]:
+  - generic [ref=f2e2]:
+    - complementary [ref=f2e3]:
+      - generic [ref=f2e4]: SF
+      - generic [ref=f2e5]:
+        - paragraph [ref=f2e6]: Local AI operations
+        - heading "SovereignForge" [level=1] [ref=f2e7]
+      - navigation "Primary navigation" [ref=f2e8]:
+        - link "Dashboard" [ref=f2e9] [cursor=pointer]:
+          - /url: /
+        - link "Workbench" [ref=f2e10] [cursor=pointer]:
+          - /url: /workbench
+        - link "Models" [ref=f2e11] [cursor=pointer]:
+          - /url: /models
+      - generic [ref=f2e12]:
+        - text: Sovereign mode
+        - generic [ref=f2e14]: Local providers only
+    - main [ref=f2e15]:
+      - generic [ref=f2e16]:
+        - generic [ref=f2e18]:
+          - paragraph [ref=f2e19]: Foundation vertical slice
+          - heading "Local model workbench" [level=2] [ref=f2e20]
+          - paragraph [ref=f2e21]: This temporary endpoint verifies the local provider path.
+        - generic [ref=f2e22]:
+          - generic [ref=f2e24]:
+            - generic [ref=f2e25]: Task
+            - textbox "Task" [ref=f2e26]: Explain sovereign local AI in three concise sentences.
+            - generic [ref=f2e27]:
+              - generic [ref=f2e28]: 54 / 8,000
+              - button "Run locally" [ref=f2e29] [cursor=pointer]
+          - generic [ref=f2e30]:
+            - generic [ref=f2e32]:
+              - paragraph [ref=f2e33]: Result
+              - heading "Local response" [level=2] [ref=f2e34]
+            - paragraph [ref=f2e35]: Submit a task to verify browser → API → Ollama.
+  - alert [ref=f2e36]

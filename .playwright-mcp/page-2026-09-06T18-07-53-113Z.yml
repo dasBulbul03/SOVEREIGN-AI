@@ -1,0 +1,25 @@
+- generic [active] [ref=f1e1]:
+  - generic [ref=f1e2]:
+    - complementary [ref=f1e3]:
+      - generic [ref=f1e4]: SF
+      - generic [ref=f1e5]:
+        - paragraph [ref=f1e6]: Local AI operations
+        - heading "SovereignForge" [level=1] [ref=f1e7]
+      - navigation "Primary navigation" [ref=f1e8]:
+        - link "Dashboard" [ref=f1e9] [cursor=pointer]:
+          - /url: /
+        - link "Workbench" [ref=f1e10] [cursor=pointer]:
+          - /url: /workbench
+        - link "Models" [ref=f1e11] [cursor=pointer]:
+          - /url: /models
+      - generic [ref=f1e12]:
+        - text: Sovereign mode
+        - generic [ref=f1e14]: Local providers only
+    - main [ref=f1e15]:
+      - generic [ref=f1e16]:
+        - generic [ref=f1e18]:
+          - paragraph [ref=f1e19]: Local capability registry
+          - heading "Models" [level=2] [ref=f1e20]
+          - paragraph [ref=f1e21]: Configured models are metadata; readiness is observed from Ollama.
+        - generic [ref=f1e22]: Loading model registry…
+  - alert [ref=f1e23]

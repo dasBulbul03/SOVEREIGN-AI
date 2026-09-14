@@ -1,0 +1,43 @@
+{
+  "dataset": "presentation-v1.0.0",
+  "organization": "Aegis Process Systems Pvt. Ltd.",
+  "classification": "synthetic-safe-to-distribute",
+  "files": [
+    {
+      "path": "01-inspection/aegis-p101-inspection-report.pdf",
+      "bytes": 2590,
+      "sha256": "62b468e3b385f08b37f5f742b47a1fb303e24826204850674638ddbe91f8df4c",
+      "destination": "workspace:01 Pump Inspection"
+    },
+    {
+      "path": "01-inspection/aegis-p101-seal-leak.jpg",
+      "bytes": 649982,
+      "sha256": "a49e5bd3046c3a9ebca322b31b1ea7dd5b28c6453fab6117e30173c7c0513d2d",
+      "destination": "workspace:01 Pump Inspection"
+    },
+    {
+      "path": "01-inspection/aegis-pump-maintenance-sop.pdf",
+      "bytes": 2680,
+      "sha256": "44446abb0ae6a13ebfc7c5ff4a73bdb5aa8a09d35f34d86699bb11adb5f6dded",
+      "destination": "knowledge:Maintenance SOPs"
+    },
+    {
+      "path": "02-coding/p101-temperature-monitor.zip",
+      "bytes": 928,
+      "sha256": "c15b93adca38a51556f356beadf7a12460819022c8d9fe060b2e6b4e89dda45f",
+      "destination": "workspace:02 Controller Fix"
+    },
+    {
+      "path": "03-procurement/mechanical-seal-quotations.csv",
+      "bytes": 305,
+      "sha256": "4372fce91c4c1b9b7e73c1967c1bf0157cc1372dec622038e53a2d41dd310a0f",
+      "destination": "workspace:03 Pump Procurement"
+    },
+    {
+      "path": "03-procurement/aegis-procurement-policy.pdf",
+      "bytes": 2458,
+      "sha256": "7ca12d92f44e0e4ff7b44e2eff8214a1559b6404012279bf267f7de225de9a5e",
+      "destination": "workspace:03 Pump Procurement"
+    }
+  ]
+}

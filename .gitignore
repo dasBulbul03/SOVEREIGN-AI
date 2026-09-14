@@ -1,0 +1,37 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.turbo/
+.docker-local/
+*.tsbuildinfo
+.venv/
+backend/.venv/
+
+# Node / Next.js
+node_modules/
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+npm-debug.log*
+
+# Local runtime data
+data/
+*.db
+*.log
+.DS_Store
+.playwright-mcp/
+/day2-knowledge.png
+demo/presentation-v1/qa/**
+!demo/presentation-v1/qa/README.md
+
+# Editors
+.idea/
+.vscode/

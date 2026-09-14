@@ -1,0 +1,26 @@
+{
+  "workflow": "document",
+  "requested_outputs": ["docx"],
+  "expected_facts": {
+    "equipment_id": "P-101",
+    "vibration_mm_s": 8.2,
+    "discharge_pressure_bar": 5.8,
+    "seal_leak": true,
+    "guard_damage": false,
+    "risk": "HIGH",
+    "human_approval_required": true
+  },
+  "required_controls": [
+    "stop P-101",
+    "close V-14 before V-15",
+    "lockout/tagout",
+    "open DV-3 slowly",
+    "verify zero bar",
+    "technician and area operator sign-off"
+  ],
+  "required_sources": [
+    "aegis-p101-inspection-report.pdf",
+    "aegis-p101-seal-leak.jpg",
+    "aegis-pump-maintenance-sop.pdf"
+  ]
+}

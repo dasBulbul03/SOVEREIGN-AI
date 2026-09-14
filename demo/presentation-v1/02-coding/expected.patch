@@ -1,0 +1,6 @@
+--- a/monitor.py
++++ b/monitor.py
+@@ -1,2 +1,2 @@
+ def total_alarm_count(temperature_alarms: int, vibration_alarms: int) -> int:
+-    return temperature_alarms - vibration_alarms
++    return temperature_alarms + vibration_alarms

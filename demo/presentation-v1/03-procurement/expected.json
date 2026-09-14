@@ -1,0 +1,12 @@
+{
+  "workflow": "procurement",
+  "requested_outputs": ["xlsx", "docx"],
+  "recommended_vendor": "Aravind Industrial",
+  "vendors": {
+    "Aravind Industrial": {"total": 45000, "status": "PASS"},
+    "Beacon Controls": {"total": 42000, "status": "REVIEW", "failed_controls": ["lead_time", "warranty"]},
+    "Crest Process Supply": {"total": 51000, "status": "REVIEW", "failed_controls": ["budget"]}
+  },
+  "required_sheets": ["Recommendation", "Quotation Lines", "Policy Controls"],
+  "human_approval_required": true
+}

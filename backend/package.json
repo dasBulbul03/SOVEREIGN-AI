@@ -1,0 +1,12 @@
+{
+  "name": "@sovereignforge/backend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": ".venv/bin/uvicorn app.main:app --reload --host 0.0.0.0 --port 8000",
+    "build": ".venv/bin/python -m compileall -q app",
+    "lint": ".venv/bin/ruff check .",
+    "typecheck": ".venv/bin/mypy app",
+    "test": ".venv/bin/pytest"
+  }
+}
